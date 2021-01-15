@@ -4,8 +4,10 @@ import pytorch_lightning as pl
 
 ##########################################################################################
 
+
 class FlashModel(pl.LightningModule):
     """DOCSTRING"""
+
     def __init__(self, model):
         super().__init__()
         self.model = model
@@ -19,21 +21,22 @@ class FlashModel(pl.LightningModule):
 
     def training_epoch_end(self, training_step_outputs):
         for pred in training_step_outputs:
-            ## do something
+            # do something
             pass
         pass
 
+
 ##########################################################################################
-## Under the hood pseudocode
+# Under the hood pseudocode
 outs = []
 for batch in train_dataloader:
-    ## Step-1: FORWARD
+    # Step-1: FORWARD
     out = training_step(val_batch)
 
-    ## Step-2: BACKWARD
+    # Step-2: BACKWARD
     loss.backward()
 
-    ## Step-3: Optim step and zero-grad
+    # Step-3: Optim step and zero-grad
     optimizer.step()
     optimizer.zero_grad()
 

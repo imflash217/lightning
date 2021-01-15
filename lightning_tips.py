@@ -24,17 +24,17 @@ DataLoader(dataset, num_workers=8, pin_memory=True)
 ### TENSOR CREATION ##################################################################
 # Construct TENSOR directly on the device when using PL module (self)
 
-t = torch.rand(2, 2).cuda()                 ## BAD
-t = torch.rand(2, 2, device=self.device)    ## GOOD
+t = torch.rand(2, 2).cuda()  # BAD
+t = torch.rand(2, 2, device=self.device)  # GOOD
 
-## For tensors that need to be MODEL's ATTRIBUTES, its best to register them as buffers
-## in the module's __init__() method
+# For tensors that need to be MODEL's ATTRIBUTES, its best to register them as buffers
+# in the module's __init__() method
 
-t = torch.rand(2, 2, device=self.device)        ## BAD
-self.register_buffer("t", torch.rand(2, 2))     ## GOOD
+t = torch.rand(2, 2, device=self.device)  # BAD
+self.register_buffer("t", torch.rand(2, 2))  # GOOD
 
 ### DDP v/s DP ##################################################################
-# Use DDP instead of DP. 
+# Use DDP instead of DP.
 # DDP is much faster compared to DP.
 
 ###  ##################################################################

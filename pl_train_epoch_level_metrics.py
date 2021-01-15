@@ -4,8 +4,10 @@ import pytorch_lightning as pl
 
 ###########################################################################################
 
+
 class FlashModel(pl.LightningModule):
     """DOCSTRING"""
+
     def __init__(self, model):
         super().__init__()
         self.model = model
@@ -14,25 +16,26 @@ class FlashModel(pl.LightningModule):
         x, y = batch
         y_hat = self.model(x)
         loss = F.cross_entropy(y_hat, y)
-        ## logs metrics for each training_step
-        ## and the average across each epoch, to the logger and progress-bar
+        # logs metrics for each training_step
+        # and the average across each epoch, to the logger and progress-bar
         self.log("train_loss", loss,
                  on_step=True,
                  on_epoch=True,
                  logger=True,
                  prog_bar=True
-                )
+                 )
         return loss
 
+
 ###########################################################################################
-## Under the hood
+# Under the hood
 outs = []
 for batch in train_dataloader:
-    ## Step-1: FORWARD
+    # Step-1: FORWARD
     out = training_step(val_batch)
-    ## Step-2: BACKWARD
+    # Step-2: BACKWARD
     loss.backward()
-    ## optim step and cread grads
+    # optim step and cread grads
     optimizer.step()
     optimizer.zero_grad()
 
