@@ -106,7 +106,7 @@ for batch in dataloader:
     out = validation_step_end(dp_outs)
     outs.append(out)
 
-## here, Do something with the outoputs of all batches
+## here, Do something with the outputs of all batches
 # Step-3
 validation_epoch_end(outs)
 ##########################################################################################
